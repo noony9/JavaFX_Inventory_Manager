@@ -29,7 +29,7 @@
       <TextField fx:id="addPartPriceCostText" layoutX="131.0" layoutY="223.0" />
       <TextField fx:id="addPartInvText" layoutX="131.0" layoutY="188.0" />
       <TextField fx:id="addPartNameText" layoutX="131.0" layoutY="149.0" />
-      <RadioButton fx:id="inhouseRadioButton" layoutX="174.0" layoutY="70.0" mnemonicParsing="false" text="Inhouse">
+      <RadioButton fx:id="inhouseRadioButton" layoutX="174.0" layoutY="70.0" mnemonicParsing="false" selected="true" text="Inhouse">
          <toggleGroup>
             <ToggleGroup fx:id="partGroup" />
          </toggleGroup></RadioButton>

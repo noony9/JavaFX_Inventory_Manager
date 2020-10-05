@@ -1,6 +1,7 @@
 package C482_PA_D_Jacobs.Controller;
 
 import C482_PA_D_Jacobs.Model.InhousePart;
+import C482_PA_D_Jacobs.Model.Inventory;
 import C482_PA_D_Jacobs.Model.OutsourcedPart;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,77 +52,79 @@ public class AddModifyPartScreenController implements Initializable {
     public void onActionSaveAddPart(ActionEvent actionEvent) throws IOException {
 
         if (partGroup.getSelectedToggle() == inhouseRadioButton){
-            try {
-                // capture field data and save
-                int id = Integer.parseInt(addPartIDText.getText());
-                String name = addPartNameText.getText();
-                double price = Double.parseDouble(addPartPriceCostText.getText());
-                int stock = Integer.parseInt(addPartInvText.getText());
-                int min = Integer.parseInt(addPartMinText.getText());
-                int max = Integer.parseInt(addPartMaxText.getText());
-                int machineID = Integer.parseInt(addPartMachineIDText.getText());
 
-                // verify fields are not null
-                if ((String.valueOf(name).isEmpty() || String.valueOf(id).isEmpty() || String.valueOf(price).isEmpty()
-                        || String.valueOf(stock).isEmpty() || String.valueOf(min).isEmpty() ||
-                        String.valueOf(max).isEmpty() || String.valueOf(machineID).isEmpty())) {
+            // verify fields are not null
+            if ((addPartNameText.getText().trim().isEmpty() || addPartIDText.getText().trim().isEmpty() ||
+                    addPartPriceCostText.getText().trim().isEmpty() || addPartInvText.getText().trim().isEmpty() ||
+                    addPartMinText.getText().trim().isEmpty() || addPartMaxText.getText().trim().isEmpty() ||
+                    addPartMachineIDText.getText().trim().isEmpty())) {
 
-                    // alert user that a field was left blank
-                    Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-                    confirmation.setTitle("Please enter information into all fields before saving.");
-                    Optional<ButtonType> input = confirmation.showAndWait();
+                // alert user that a field was left blank
+                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmation.setTitle("Please enter information into all fields before saving.");
+                Optional<ButtonType> input = confirmation.showAndWait();
 
-                    return;
-                }
-                else {
+                return;
+            }
+            else {
+                try {
+
+                    // capture field data and save
+                    int id = Integer.parseInt(addPartIDText.getText());
+                    String name = addPartNameText.getText();
+                    double price = Double.parseDouble(addPartPriceCostText.getText());
+                    int stock = Integer.parseInt(addPartInvText.getText());
+                    int min = Integer.parseInt(addPartMinText.getText());
+                    int max = Integer.parseInt(addPartMaxText.getText());
+                    int machineID = Integer.parseInt(addPartMachineIDText.getText());
 
                     // create the inhouse part
-                    InhousePart inhouse = new InhousePart(id, name, price, stock, min, max, machineID);
+                    InhousePart inhousePart = new InhousePart(id, name, price, stock, min, max, machineID);
 
                     // add the inhouse part
-                    //FIXME
+                    Inventory.addPart(inhousePart);
                 }
-            } catch (NumberFormatException e) {
+                catch (NumberFormatException e) {
                 e.printStackTrace();
+                }
             }
+
         } //end if
         else if (partGroup.getSelectedToggle() == outsourcedRadioButton) {
 
-            // update the label machineID to companyName
-            machineIDLabel.setText("Company Name");
+            // verify fields are not null
+            if ((addPartNameText.getText().trim().isEmpty() || addPartIDText.getText().trim().isEmpty() ||
+                    addPartPriceCostText.getText().trim().isEmpty() || addPartInvText.getText().trim().isEmpty() ||
+                    addPartMinText.getText().trim().isEmpty() || addPartMaxText.getText().trim().isEmpty() ||
+                    addPartMachineIDText.getText().trim().isEmpty())) {
 
-            try {
-                // capture field data and save
-                int id = Integer.parseInt(addPartIDText.getText());
-                String name = addPartNameText.getText();
-                double price = Double.parseDouble(addPartPriceCostText.getText());
-                int stock = Integer.parseInt(addPartInvText.getText());
-                int min = Integer.parseInt(addPartMinText.getText());
-                int max = Integer.parseInt(addPartMaxText.getText());
-                String companyName = addPartMachineIDText.getText();
+                // alert user that a field was left blank
+                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmation.setTitle("Please enter information into all fields before saving.");
+                Optional<ButtonType> input = confirmation.showAndWait();
 
-
-                // verify fields are not null
-                if ((String.valueOf(name).isEmpty() || String.valueOf(id).isEmpty() || String.valueOf(price).isEmpty()
-                        || String.valueOf(stock).isEmpty() || String.valueOf(min).isEmpty() ||
-                        String.valueOf(max).isEmpty() || String.valueOf(companyName).isEmpty())) {
-
-                    // alert user that a field was left blank
-                    Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-                    confirmation.setTitle("Please enter information into all fields before saving.");
-                    Optional<ButtonType> input = confirmation.showAndWait();
-
-                    return;
-                } else {
+                return;
+            }
+            else {
+                try {
+                    // capture field data and save
+                    int id = Integer.parseInt(addPartIDText.getText());
+                    String name = addPartNameText.getText();
+                    double price = Double.parseDouble(addPartPriceCostText.getText());
+                    int stock = Integer.parseInt(addPartInvText.getText());
+                    int min = Integer.parseInt(addPartMinText.getText());
+                    int max = Integer.parseInt(addPartMaxText.getText());
+                    String companyName = addPartMachineIDText.getText();
 
                     // create the outsourced part
-                    OutsourcedPart outsourced = new OutsourcedPart(id, name, price, stock, min, max, companyName);
+                    OutsourcedPart outsourcedPart = new OutsourcedPart(id, name, price, stock, min, max, companyName);
 
                     // add the outsourced part
-                    //FIXME
+                    Inventory.addPart(outsourcedPart);
                 }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+                catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
             }
         } //end else if
 
