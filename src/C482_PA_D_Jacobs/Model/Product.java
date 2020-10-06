@@ -3,10 +3,7 @@ package C482_PA_D_Jacobs.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-
 public class Product {
-    //FIXME observable associated parts list
     private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
     private String name;
@@ -15,8 +12,7 @@ public class Product {
     private int min;
     private int max;
 
-    Product(int id, String name, double price, int stock, int min, int max){
-        this.id = id;
+    public Product(String name, double price, int stock, int min, int max) {
         this.name = name;
         this.price = price;
         this.stock = stock;
@@ -83,20 +79,37 @@ public class Product {
         this.max = max;
     }
 
-    public void addAssociatedPart(Part part){
+    public ObservableList<Part> getAssociatedParts() {
+
+        return associatedParts;
+    }
+
+    public void addAssociatedPart(Part part) {
 
         associatedParts.add(part);
     }
 
-    public boolean deleteAssociatedPart(int partID){
+    public boolean deleteAssociatedPart(int partID) {
+//        boolean check = false;
+//        for (Part part : associatedParts){
+//            if (part.getId() == partID){
+//                associatedParts.remove(part);
+//                return check = true;
+//            }
+//            else check = false;
+//        }
+//        return check; //verify
+//    }
         boolean check = false;
-        for (Part part : associatedParts){
-            if (part.getId() == partID){
-                associatedParts.remove(part);
-                return check = true;
+        for (int i = 0; i < associatedParts.size(); i++) {
+
+            if (partID == associatedParts.get(i).getId()) {
+                associatedParts.remove(associatedParts.get(i));
+                check = true;
+            } else {
+                check = false;
             }
-            else check = false;
         }
-        return check; //verify
+        return check;
     }
 }

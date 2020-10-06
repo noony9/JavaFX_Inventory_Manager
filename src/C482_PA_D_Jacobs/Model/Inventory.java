@@ -7,10 +7,31 @@ import javafx.collections.ObservableList;
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static ObservableList<Part> allFilteredParts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allFilteredProducts = FXCollections.observableArrayList();
+    public static ObservableList<Part> getAllParts(){
+
+        return allParts;
+    }
+
+    public static ObservableList<Product> getAllProducts(){
+
+        return allProducts;
+    }
+
+    public static ObservableList<Part> getAllFilteredParts(){
+
+        return allFilteredParts;
+    }
+
+    public static ObservableList<Product> getAllFilteredProducts(){
+
+        return allFilteredProducts;
+    }
 
     public static void addPart(Part part){
-        part.setId(allParts.size());
-        allParts.add(part);
+        part.setId(allParts.size()); //establish unique id
+        allParts.add(part); //add the part
     }
 
     public static void addProduct(Product product){
@@ -58,14 +79,6 @@ public class Inventory {
         return products;
     }
 
-    public static ObservableList<Part> getAllParts(){
-        return allParts;
-    }
-
-    public static ObservableList<Product> getAllProducts(){
-        return allProducts;
-    }
-
     public static void updatePart(int id, Part part){
         for (Part p : allParts){
             if (id == p.getId()){
@@ -95,9 +108,10 @@ public class Inventory {
 
     public static boolean deletePart(Part part){
         boolean check = false;
-        for (Part p : allParts){
-            if (part.getId() == p.getId()){
-                allParts.remove(p);
+        for (int i = 0; i < allParts.size(); i++){
+            int partID = allParts.get( i ).getId();
+            if (part.getId() == partID){
+                allParts.remove(part);
                 check = true;
             }
             else {
@@ -109,9 +123,10 @@ public class Inventory {
 
     public static boolean deleteProduct(Product product){
         boolean check = false;
-        for (Product p : allProducts){
-            if (product.getId() == p.getId()){
-                allProducts.remove(p);
+        for (int i = 0; i < allProducts.size(); i++){
+            int productID = allProducts.get( i ).getId();
+            if (product.getId() == productID){
+                allProducts.remove(product);
                 check = true;
             }
             else {
