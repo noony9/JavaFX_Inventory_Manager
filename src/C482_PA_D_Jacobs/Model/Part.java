@@ -8,13 +8,16 @@ public abstract class Part {
     private int stock;
     private int min;
     private int max;
+    private boolean inHouse;
 
-    Part(String name, double price, int stock, int min, int max){
+    public Part(int id, String name, double price, int stock, int min, int max, boolean inHouse){
+        this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
         this.min = min;
         this.max = max;
+        this.inHouse = inHouse;
     }
 
     public int getId() {
@@ -76,4 +79,11 @@ public abstract class Part {
         this.max = max;
     }
 
+    public boolean isInHouse() {
+        return inHouse;
+    }
+
+    public void setInHouse(boolean inHouse) {
+        this.inHouse = inHouse;
+    }
 }

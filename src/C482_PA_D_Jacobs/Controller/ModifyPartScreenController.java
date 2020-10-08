@@ -48,7 +48,23 @@ public class ModifyPartScreenController implements Initializable {
             partInvText.setText(String.valueOf(part.getStock()));
             partMinText.setText(String.valueOf(part.getMin()));
             partMaxText.setText(String.valueOf(part.getMax()));
-           // partMachineIDText.setText(String.valueOf(part.getMachineID())); //FIXME: ????
+
+            if (part.isInHouse()){
+                machineIDLabel.setText("Machine ID");
+            }
+            else {
+                machineIDLabel.setText("Company Name");
+                outsourcedRadioButton.setSelected(true);
+            }
+
+            if (part instanceof InhousePart){
+
+                partMachineIDText.setText(String.valueOf(((InhousePart) part).getMachineID()));
+            }
+            else {
+
+                partMachineIDText.setText(((OutsourcedPart) part).getCompanyName());
+            }
 
     }
 
@@ -62,88 +78,77 @@ public class ModifyPartScreenController implements Initializable {
 
         if (partGroup.getSelectedToggle() == inhouseRadioButton){
 
-            // verify fields are not null
-            if ((partNameText.getText().trim().isEmpty() || partIDText.getText().trim().isEmpty() ||
-                    partPriceCostText.getText().trim().isEmpty() || partInvText.getText().trim().isEmpty() ||
-                    partMinText.getText().trim().isEmpty() || partMaxText.getText().trim().isEmpty() ||
-                    partMachineIDText.getText().trim().isEmpty())) {
+//            // verify fields are not null
+//            if ((partNameText.getText().trim().isEmpty() || partIDText.getText().trim().isEmpty() ||
+//                    partPriceCostText.getText().trim().isEmpty() || partInvText.getText().trim().isEmpty() ||
+//                    partMinText.getText().trim().isEmpty() || partMaxText.getText().trim().isEmpty() ||
+//                    partMachineIDText.getText().trim().isEmpty())) {
+//
+//                // alert user that a field was left blank
+//                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+//                confirmation.setTitle("Please enter information into all fields before saving.");
+//                Optional<ButtonType> input = confirmation.showAndWait();
+//
+//                return;
+//            }
 
-                // alert user that a field was left blank
-                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-                confirmation.setTitle("Please enter information into all fields before saving.");
-                Optional<ButtonType> input = confirmation.showAndWait();
+             // capture field data and save
+            int id = Integer.parseInt(partIDText.getText());
+            String name = partNameText.getText();
+            double price = Double.parseDouble(partPriceCostText.getText());
+            int stock = Integer.parseInt(partInvText.getText());
+            int min = Integer.parseInt(partMinText.getText());
+            int max = Integer.parseInt(partMaxText.getText());
+            int machineID = Integer.parseInt(partMachineIDText.getText());
 
-                return;
-            }
-            try {
+            // create the inhouse part
+            Part inhousePart = new InhousePart(id, name, price, stock, min, max, true, machineID);
 
-                // capture field data and save
-                String name = partNameText.getText();
-                double price = Double.parseDouble(partPriceCostText.getText());
-                int stock = Integer.parseInt(partInvText.getText());
-                int min = Integer.parseInt(partMinText.getText());
-                int max = Integer.parseInt(partMaxText.getText());
-                int machineID = Integer.parseInt(partMachineIDText.getText());
-
-                // create the inhouse part
-                InhousePart inhousePart = new InhousePart(name, price, stock, min, max, machineID);
-
-                // update the inhouse part
-                Inventory.updatePart(inhousePart.getId(), inhousePart);
-            }
-            catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-
-            // return to main screen
-            stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("../View/MainScreen.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
+            // update the inhouse part
+            Inventory.updatePart(inhousePart.getId(), inhousePart);
 
         } //end if
         else if (partGroup.getSelectedToggle() == outsourcedRadioButton) {
 
-            // verify fields are not null
-            if ((partNameText.getText().trim().isEmpty() || partIDText.getText().trim().isEmpty() ||
-                    partPriceCostText.getText().trim().isEmpty() || partInvText.getText().trim().isEmpty() ||
-                    partMinText.getText().trim().isEmpty() || partMaxText.getText().trim().isEmpty() ||
-                    partMachineIDText.getText().trim().isEmpty())) {
+//            // verify fields are not null
+//            if ((partNameText.getText().trim().isEmpty() || partIDText.getText().trim().isEmpty() ||
+//                    partPriceCostText.getText().trim().isEmpty() || partInvText.getText().trim().isEmpty() ||
+//                    partMinText.getText().trim().isEmpty() || partMaxText.getText().trim().isEmpty() ||
+//                    partMachineIDText.getText().trim().isEmpty())) {
+//
+//                // alert user that a field was left blank
+//                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+//                confirmation.setTitle("Please enter information into all fields before saving.");
+//                Optional<ButtonType> input = confirmation.showAndWait();
+//
+//                return;
+//            }
+//            else {
+                // capture field data and save
+            int id = Integer.parseInt(partIDText.getText());
+            String name = partNameText.getText();
+            double price = Double.parseDouble(partPriceCostText.getText());
+            int stock = Integer.parseInt(partInvText.getText());
+            int min = Integer.parseInt(partMinText.getText());
+            int max = Integer.parseInt(partMaxText.getText());
+            String companyName = partMachineIDText.getText();
 
-                // alert user that a field was left blank
-                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-                confirmation.setTitle("Please enter information into all fields before saving.");
-                Optional<ButtonType> input = confirmation.showAndWait();
+            // create the outsourced part
+            Part outsourcedPart = new OutsourcedPart(id, name, price, stock, min, max,
+                    false, companyName);
 
-                return;
-            }
-            else {
-                try {
-                    // capture field data and save
-                    String name = partNameText.getText();
-                    double price = Double.parseDouble(partPriceCostText.getText());
-                    int stock = Integer.parseInt(partInvText.getText());
-                    int min = Integer.parseInt(partMinText.getText());
-                    int max = Integer.parseInt(partMaxText.getText());
-                    String companyName = partMachineIDText.getText();
+            // update the outsourced part
+            Inventory.updatePart(outsourcedPart.getId(), outsourcedPart);
 
-                    // create the outsourced part
-                    OutsourcedPart outsourcedPart = new OutsourcedPart(name, price, stock, min, max, companyName);
-
-                    // update the outsourced part
-                    Inventory.updatePart(outsourcedPart.getId(), outsourcedPart);
-                }
-                catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-
-                // return to main screen
-                stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("../View/MainScreen.fxml"));
-                stage.setScene(new Scene(scene));
-                stage.show();
-            }
+            //}
         } //end else if
+
+        // return to main screen
+        stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("../View/MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
     } //end method
 
     public void onActionCancelModifyPart(ActionEvent actionEvent) throws IOException {
@@ -158,7 +163,7 @@ public class ModifyPartScreenController implements Initializable {
     public void onActionInhouseRadioButton(ActionEvent actionEvent) {
 
         // if inhouse, change label to "Machine ID"
-        machineIDLabel.setText("Company Name");
+        machineIDLabel.setText("Machine ID");
     }
 
     public void onActionOutsourcedRadioButton(ActionEvent actionEvent) {

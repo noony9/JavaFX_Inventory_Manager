@@ -56,6 +56,7 @@ public class MainScreenController implements Initializable {
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
     }
 
 
@@ -70,6 +71,7 @@ public class MainScreenController implements Initializable {
 //    }
 
     public void onActionExitButton(ActionEvent actionEvent) {
+
         System.exit(0);
     }
 
@@ -86,19 +88,8 @@ public class MainScreenController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/ModifyPartScreen.fxml"));
         loader.load();
-
         ModifyPartScreenController modifyPartScreenController = loader.getController();
         modifyPartScreenController.sendPart(partsTableView.getSelectionModel().getSelectedItem());
-
-        if (partsTableView.getSelectionModel().getSelectedItem() instanceof OutsourcedPart) {
-
-            // if outsourced, change default label "Machine ID" to "Company Name"
-            modifyPartScreenController.machineIDLabel.setText("Company Name");
-
-            // change radio button from default position "Inhouse" to "Outsourced"
-            modifyPartScreenController.outsourcedRadioButton.setSelected(true);
-
-        }
 
         stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Parent scene = loader.getRoot();
@@ -239,6 +230,6 @@ public class MainScreenController implements Initializable {
         productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
     }
+
 }

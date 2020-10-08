@@ -39,6 +39,38 @@ public class Inventory {
         allProducts.add(product);
     }
 
+    public static void updatePart(int id, Part part){
+//        for (Part p : allParts){
+//            if (id == p.getId()){
+//                p.setName(part.getName());
+//                p.setName(part.getName());
+//                p.setPrice(part.getPrice());
+//                p.setStock(part.getStock());
+//                p.setMin(part.getMin());
+//                p.setMax(part.getMax());
+//                if (part.getClass().isInstance(InhousePart.class)){
+//                    System.out.println("Is an instance of Inhouse Part");
+//                }
+//            }
+//        }
+        allParts.set(part.getId(), part);
+    }
+
+    public static void updateProduct(int id, Product product){
+
+//        for (Product p : allProducts){
+//            if (id == p.getId()){
+//                p.setName(product.getName());
+//                p.setName(product.getName());
+//                p.setPrice(product.getPrice());
+//                p.setStock(product.getStock());
+//                p.setMin(product.getMin());
+//                p.setMax(product.getMax());
+//            }
+//        }
+        allProducts.set(product.getId(), product);
+    }
+
     public static Part lookupPart(int id){
         for (Part p : allParts){
             if (id == p.getId()){
@@ -77,33 +109,6 @@ public class Inventory {
         }
         //return null;
         return products;
-    }
-
-    public static void updatePart(int id, Part part){
-        for (Part p : allParts){
-            if (id == p.getId()){
-                p.setName(part.getName());
-                p.setName(part.getName());
-                p.setPrice(part.getPrice());
-                p.setStock(part.getStock());
-                p.setMin(part.getMin());
-                p.setMax(part.getMax());
-            }
-        }
-    }
-
-    public static void updateProduct(int id, Product product){
-
-        for (Product p : allProducts){
-            if (id == p.getId()){
-                p.setName(product.getName());
-                p.setName(product.getName());
-                p.setPrice(product.getPrice());
-                p.setStock(product.getStock());
-                p.setMin(product.getMin());
-                p.setMax(product.getMax());
-            }
-        }
     }
 
     public static boolean deletePart(Part part){

@@ -4,8 +4,9 @@ public class InhousePart extends Part {
 
     private int machineID;
 
-    public InhousePart(String name, double price, int stock, int min, int max, int machineID) {
-        super(name, price, stock, min, max);
+    public InhousePart(int id, String name, double price, int stock, int min, int max, boolean inHouse, int machineID) {
+        super(id, name, price, stock, min, max, inHouse);
+        this.machineID = machineID;
     }
 
     public int getMachineID() {

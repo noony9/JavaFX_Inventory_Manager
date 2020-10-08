@@ -71,7 +71,7 @@ public class ModifyProductScreenController implements Initializable {
         productMaxText.setText(String.valueOf(product.getMax()));
 
         // Initialize Associated Parts TableView
-        productAssociatedPartsTableView.setItems(product.getAssociatedParts()); //FIXME: NOT WORKING
+        productAssociatedPartsTableView.setItems(product.getAssociatedParts());
 
         productAssociatedPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productAssociatedPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -97,6 +97,7 @@ public class ModifyProductScreenController implements Initializable {
             try {
 
                 // capture field data and save
+                int id = Integer.parseInt(productIDText.getText());
                 String name = productNameText.getText();
                 double price = Double.parseDouble(productPriceText.getText());
                 int stock = Integer.parseInt(productInvText.getText());
@@ -104,7 +105,7 @@ public class ModifyProductScreenController implements Initializable {
                 int max = Integer.parseInt(productMaxText.getText());
 
                 // create the product
-                Product product = new Product(name, price, stock, min, max);
+                Product product = new Product(id, name, price, stock, min, max);
 
                 // update the product
                 Inventory.updateProduct(product.getId(), product);

@@ -3,6 +3,7 @@ package C482_PA_D_Jacobs.Controller;
 import C482_PA_D_Jacobs.Model.InhousePart;
 import C482_PA_D_Jacobs.Model.Inventory;
 import C482_PA_D_Jacobs.Model.OutsourcedPart;
+import C482_PA_D_Jacobs.Model.Part;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,12 +63,12 @@ public class AddPartScreenController implements Initializable {
                 confirmation.setTitle("Please enter information into all fields before saving.");
                 Optional<ButtonType> input = confirmation.showAndWait();
 
-                return;
             }
             else {
                 try {
 
                     // capture field data and save
+                    int id = Integer.parseInt(partIDText.getText());
                     String name = partNameText.getText();
                     double price = Double.parseDouble(partPriceCostText.getText());
                     int stock = Integer.parseInt(partInvText.getText());
@@ -75,8 +76,8 @@ public class AddPartScreenController implements Initializable {
                     int max = Integer.parseInt(partMaxText.getText());
                     int machineID = Integer.parseInt(partMachineIDText.getText());
 
-                    // create the inhouse part
-                    InhousePart inhousePart = new InhousePart(name, price, stock, min, max, machineID);
+                    // create the inhouse part //FIXME:
+                    Part inhousePart = new InhousePart(id, name, price, stock, min, max, true, machineID);
 
                     // add the inhouse part
                     Inventory.addPart(inhousePart);
@@ -106,11 +107,11 @@ public class AddPartScreenController implements Initializable {
                 confirmation.setTitle("Please enter information into all fields before saving.");
                 Optional<ButtonType> input = confirmation.showAndWait();
 
-                return;
             }
             else {
                 try {
                     // capture field data and save
+                    int id = Integer.parseInt(partIDText.getText());
                     String name = partNameText.getText();
                     double price = Double.parseDouble(partPriceCostText.getText());
                     int stock = Integer.parseInt(partInvText.getText());
@@ -119,7 +120,8 @@ public class AddPartScreenController implements Initializable {
                     String companyName = partMachineIDText.getText();
 
                     // create the outsourced part
-                    OutsourcedPart outsourcedPart = new OutsourcedPart(name, price, stock, min, max, companyName);
+                    Part outsourcedPart = new OutsourcedPart(id, name, price, stock, min, max,
+                            false, companyName);
 
                     // add the outsourced part
                     Inventory.addPart(outsourcedPart);
@@ -160,4 +162,5 @@ public class AddPartScreenController implements Initializable {
         // if outsourced, change label to "Company Name"
         machineIDLabel.setText("Company Name");
     }
+
 }

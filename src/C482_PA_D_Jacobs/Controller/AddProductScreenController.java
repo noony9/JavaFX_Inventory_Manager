@@ -79,6 +79,7 @@ public class AddProductScreenController implements Initializable {
             try {
 
                 // capture field data and save
+                int id = Integer.parseInt(productIDText.getText());
                 String name = productNameText.getText();
                 double price = Double.parseDouble(productPriceText.getText());
                 int stock = Integer.parseInt(productInvText.getText());
@@ -86,7 +87,7 @@ public class AddProductScreenController implements Initializable {
                 int max = Integer.parseInt(productMaxText.getText());
 
                 // create the product
-                Product product = new Product(name, price, stock, min, max);
+                Product product = new Product(id, name, price, stock, min, max);
 
                 // update the product
                 Inventory.addProduct(product);
