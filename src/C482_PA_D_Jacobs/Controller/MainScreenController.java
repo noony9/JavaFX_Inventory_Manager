@@ -242,12 +242,12 @@ public class MainScreenController implements Initializable {
         }
     }
 
-    /** This method resets the global Filtered Parts List and adds the parts that match the user's input string.
-     * This method clears the global Filtered Parts List, loops through the Filtered Parts List to identify if the
-     * parameter string matches the ID or Name from each part in the list, then adds the part to the Filtered Parts List
+    /** This method resets the Filtered Parts List and adds the parts that match the user's input string.
+     * This method clears the Filtered Parts List, loops through the Filtered Parts List to identify if the
+     * part ID or Name contains user input, then adds the part to the Filtered Parts List
      * and returns the Filtered Parts List.
      * @param string The string to be filtered
-     * @return Inventory.getAllFilteredParts()
+     * @return allFilteredParts
      * @see MainScreenController#onActionPartSearch(ActionEvent)
      */
     public ObservableList<Part> filterPart(String string) {
@@ -256,20 +256,15 @@ public class MainScreenController implements Initializable {
             Inventory.getAllFilteredParts().clear();
         }
 
-        for (Part part : Inventory.getAllParts()) {
-            if (part.getName().contains(string) || String.valueOf(part.getId()).equals(string)){
-                Inventory.getAllFilteredParts().add(part);
-            }
-        }
-        return Inventory.getAllFilteredParts();
+        return Inventory.lookupPart(string);
     }
 
-    /** This method resets the global Filtered Products List and adds the products that match the user's input string.
-     * This method clears the global Filtered Products List, loops through the Filtered Products List to identify if the
-     * parameter string matches the ID or Name from each products in the list, then adds the product to the Filtered
-     * Products List and returns the Filtered Products List.
+    /** This method resets the Filtered Products List and adds the products that match the user's input string.
+     * This method clears the Filtered Products List, loops through the Filtered Products List to identify if the
+     * product ID or Name contains user input, then adds the part to the Filtered Products List
+     * and returns the Filtered Products List.
      * @param string The string to be filtered
-     * @return Inventory.getAllFilteredProducts()
+     * @return allFilteredProducts
      * @see MainScreenController#onActionProductSearch(ActionEvent)
      */
     public ObservableList<Product> filterProduct(String string) {
@@ -277,20 +272,13 @@ public class MainScreenController implements Initializable {
         if(!(Inventory.getAllFilteredProducts().isEmpty())){
             Inventory.getAllFilteredProducts().clear();
         }
-
-        for (Product product : Inventory.getAllProducts()) {
-            if (product.getName().contains(string) || String.valueOf(product.getId()).equals(string)){
-                Inventory.getAllFilteredProducts().add(product);
-            }
-        }
-        return Inventory.getAllFilteredProducts();
+        return Inventory.lookupProduct(string);
     }
 
     /** This method filters the Parts TableView. 
      * This method captures user input in the search box, calls filterPart() method to filter the Parts TableView,
      * then sets the Parts TableView with the filtered results.
      * @param actionEvent The event
-     * @see ModifyPartScreenController#sendPart(Part) 
      */
     public void onActionPartSearch(ActionEvent actionEvent) {
 
@@ -300,21 +288,19 @@ public class MainScreenController implements Initializable {
         // filter parts based on the search string
         filterPart(searchString);
 
-        // Initialize Parts
+        // initialize parts
         partsTableView.setItems(Inventory.getAllFilteredParts());
 
         partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
     }
 
     /** This method filters the Products TableView. 
      * This method captures user input in the search box, calls filterProduct() method to filter the Product TableView,
      * then sets the Product TableView with the filtered results.
      * @param actionEvent The event
-     * @see ModifyProductScreenController#sendProduct(Product) 
      */
     public void onActionProductSearch(ActionEvent actionEvent) {
 
@@ -324,14 +310,12 @@ public class MainScreenController implements Initializable {
         // filter parts based on the search string
         filterProduct(searchString);
 
-        // Initialize Parts
+        // initialize products
         productTableView.setItems(Inventory.getAllFilteredProducts());
 
         productIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
     }
-
 }

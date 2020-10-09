@@ -221,6 +221,45 @@ public class AddProductScreenController implements Initializable {
         }
     }
 
+    /** This method resets the Filtered Parts List and adds the parts that match the user's input string.
+     * This method clears the global Filtered Parts List, loops through the Filtered Parts List to identify if the
+     * part ID or Name contains user input, then adds the part to the Filtered Parts List
+     * and returns the Filtered Parts List.
+     * @param string The string to be filtered
+     * @return Inventory.getAllFilteredParts()
+     * @see MainScreenController#onActionPartSearch(ActionEvent)
+     */
+    public ObservableList<Part> filterPart(String string) {
+
+        if(!(Inventory.getAllFilteredParts().isEmpty())){
+            Inventory.getAllFilteredParts().clear();
+        }
+
+        return Inventory.lookupPart(string);
+    }
+
+    /** This method filters the Parts TableView.
+     * This method captures user input in the search box, calls filterPart() method to filter the Parts TableView,
+     * then sets the Parts TableView with the filtered results.
+     * @param actionEvent The event
+     */
+    public void onActionPartSearchBox(ActionEvent actionEvent) {
+
+        // get text from search text box and store in a string
+        String searchString = productSearchBox.getText();
+
+        // filter parts based on the search string
+        filterPart(searchString);
+
+        // initialize parts
+        productPartsListTableView.setItems(Inventory.getAllFilteredParts());
+
+        productPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPartInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
     /** This method is the application's de facto input validation method used by the Add and Modify views' save method
      * to ensure valid input is provided prior to proceeding with instancing or updating the products.
      * This method validates in this order: ensure no fields are empty (ID is auto-generated and is left out of all

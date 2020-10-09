@@ -41,7 +41,7 @@ public class Main extends Application {
                 "XYZ Parts");
         Part robotFeet = new OutsourcedPart(5,"Robot Feet", 21.00, 20, 0, 30, false,
                 "XYZ Parts");
-        Part tenWDFourty = new OutsourcedPart(5,"10wd40 Oil", 21.00, 20, 0, 30, false,
+        Part tenWDFourty = new OutsourcedPart(6,"10wd40 Oil", 25.00, 20, 0, 30, false,
                 "XYZ Parts");
 
         // Add parts to observable list

@@ -9,10 +9,19 @@ public class InhousePart extends Part {
 
     /**
      * Constructor
+     * @param id ID
+     * @param name name
+     * @param price price
+     * @param stock stock inventory
+     * @param min minimum inventory
+     * @param max maximum inventory
+     * @param inHouse flag for inhouse or outsourced part
+     * @param machineID machine ID
      * */
     public InhousePart(int id, String name, double price, int stock, int min, int max, boolean inHouse, int machineID) {
         super(id, name, price, stock, min, max, inHouse);
         this.machineID = machineID;
+
     }
 
     /**

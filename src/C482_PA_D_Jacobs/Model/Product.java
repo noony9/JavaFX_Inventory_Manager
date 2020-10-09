@@ -18,6 +18,12 @@ public class Product {
 
     /**
      * Constructor
+     * @param id ID
+     * @param name name
+     * @param price price
+     * @param stock stock inventory
+     * @param min minimum inventory
+     * @param max maximum inventory
      * */
     public Product(int id, String name, double price, int stock, int min, int max) {
         this.id = id;

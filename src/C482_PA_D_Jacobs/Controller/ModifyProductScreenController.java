@@ -3,6 +3,7 @@ package C482_PA_D_Jacobs.Controller;
 import C482_PA_D_Jacobs.Model.Inventory;
 import C482_PA_D_Jacobs.Model.Part;
 import C482_PA_D_Jacobs.Model.Product;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -233,6 +234,41 @@ public class ModifyProductScreenController implements Initializable {
                 }
             }
         }
+    }
+
+    /** This method resets the Filtered Parts List and adds the parts that match the user's input string.
+     * This method clears the global Filtered Parts List, loops through the Filtered Parts List to identify if the
+     * part ID or Name contains user input, then adds the part to the Filtered Parts List
+     * and returns the Filtered Parts List.
+     * @param string The string to be filtered
+     * @return Inventory.getAllFilteredParts()
+     * @see MainScreenController#onActionPartSearch(ActionEvent)
+     */
+    public ObservableList<Part> filterPart(String string) {
+
+        if(!(Inventory.getAllFilteredParts().isEmpty())){
+            Inventory.getAllFilteredParts().clear();
+        }
+
+        return Inventory.lookupPart(string);
+    }
+
+
+    public void onActionPartSearchBox(ActionEvent actionEvent) {
+
+        // get text from search text box and store in a string
+        String searchString = productSearchBox.getText();
+
+        // filter parts based on the search string
+        filterPart(searchString);
+
+        // initialize parts
+        productPartsListTableView.setItems(Inventory.getAllFilteredParts());
+
+        productPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPartInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     /** This method is the application's de facto input validation method used by the Add and Modify views' save method
