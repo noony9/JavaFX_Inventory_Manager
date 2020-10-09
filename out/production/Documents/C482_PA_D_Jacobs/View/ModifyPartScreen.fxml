@@ -18,7 +18,7 @@
         <Label fx:id="machineIDLabel" layoutX="64.0" layoutY="304.0" text="Machine ID" />
         <Label layoutX="64.0" layoutY="264.0" text="Max" />
         <Label layoutX="331.0" layoutY="266.0" prefWidth="28.0" text="Min" />
-        <TextField fx:id="partIDText" layoutX="163.0" layoutY="111.0" />
+        <TextField fx:id="partIDText" editable="false" layoutX="163.0" layoutY="111.0" opacity="0.75" />
         <TextField fx:id="partMaxText" layoutX="163.0" layoutY="258.0" />
         <TextField fx:id="partMachineIDText" layoutX="163.0" layoutY="298.0" />
         <TextField fx:id="partMinText" layoutX="372.0" layoutY="258.0" />

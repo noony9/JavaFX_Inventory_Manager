@@ -4,10 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="499.0" prefWidth="744.0"
-            xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="C482_PA_D_Jacobs.Controller.ModifyProductScreenController">
+<AnchorPane prefHeight="499.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C482_PA_D_Jacobs.Controller.ModifyProductScreenController">
     <children>
         <Label layoutX="34.0" layoutY="46.0" text="Modify Product">
             <font>
@@ -21,14 +18,14 @@
         <Label layoutX="62.0" layoutY="104.0" text="ID" />
         <Label layoutX="62.0" layoutY="192.0" text="Inv" />
         <TextField fx:id="productInvText" layoutX="101.0" layoutY="188.0" prefHeight="25.0" prefWidth="100.0" />
-        <TextField fx:id="productIDText" layoutX="101.0" layoutY="100.0" prefHeight="25.0" prefWidth="100.0" />
+        <TextField fx:id="productIDText" editable="false" layoutX="101.0" layoutY="100.0" opacity="0.75" prefHeight="25.0" prefWidth="100.0" />
         <TextField fx:id="productMinText" layoutX="101.0" layoutY="285.0" prefHeight="25.0" prefWidth="61.0" />
         <TextField fx:id="productPriceText" layoutX="101.0" layoutY="237.0" prefHeight="25.0" prefWidth="100.0" />
         <TextField fx:id="productNameText" layoutX="101.0" layoutY="141.0" prefHeight="25.0" prefWidth="100.0" />
         <TextField fx:id="productMaxText" layoutX="211.0" layoutY="285.0" prefHeight="25.0" prefWidth="61.0" />
         <TextField fx:id="productSearchBox" layoutX="546.0" layoutY="66.0" prefHeight="25.0" prefWidth="159.0" promptText="Search by Part ID or Name" />
-        <Button fx:id="productPartsListAddButton" layoutX="606.0" layoutY="248.0" mnemonicParsing="false" text="Add" />
-        <Button fx:id="productRemoveAssociatedPartButton" layoutX="507.0" layoutY="427.0" mnemonicParsing="false" text="Remove Associated Part" />
+        <Button fx:id="productPartsListAddButton" layoutX="606.0" layoutY="248.0" mnemonicParsing="false" onAction="#onActionPartsListAddButton" text="Add" />
+        <Button fx:id="removeAssociatedPartButton" layoutX="507.0" layoutY="427.0" mnemonicParsing="false" onAction="#onActionRemoveAssociatedPartButton" text="Remove Associated Part" />
         <Button fx:id="productCancelButton" layoutX="599.0" layoutY="460.0" mnemonicParsing="false" onAction="#onActionCancelAddProduct" text="Cancel" />
         <Button fx:id="productSaveButton" layoutX="507.0" layoutY="460.0" mnemonicParsing="false" onAction="#onActionSaveAddProduct" prefHeight="25.0" prefWidth="52.0" text="Save" />
         <Pane layoutX="345.0" layoutY="104.0" prefHeight="140.0" prefWidth="372.0" style="-fx-border-color: black;">

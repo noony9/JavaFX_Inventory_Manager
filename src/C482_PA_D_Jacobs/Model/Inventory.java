@@ -4,6 +4,11 @@ package C482_PA_D_Jacobs.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * This class is the model that stores data for Parts and Products and contains the methods to update, add, remove,
+ * and retrieve them.
+ * */
+
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
@@ -30,45 +35,41 @@ public class Inventory {
     }
 
     public static void addPart(Part part){
-        part.setId(allParts.size()); //establish unique id
-        allParts.add(part); //add the part
+        allParts.add(part);
     }
 
     public static void addProduct(Product product){
-        product.setId(allProducts.size());
         allProducts.add(product);
     }
 
     public static void updatePart(int id, Part part){
-//        for (Part p : allParts){
-//            if (id == p.getId()){
-//                p.setName(part.getName());
-//                p.setName(part.getName());
-//                p.setPrice(part.getPrice());
-//                p.setStock(part.getStock());
-//                p.setMin(part.getMin());
-//                p.setMax(part.getMax());
-//                if (part.getClass().isInstance(InhousePart.class)){
-//                    System.out.println("Is an instance of Inhouse Part");
-//                }
-//            }
-//        }
-        allParts.set(part.getId(), part);
+        for (Part p : allParts){
+            if (id == p.getId()){
+                p.setName(part.getName());
+                p.setName(part.getName());
+                p.setPrice(part.getPrice());
+                p.setStock(part.getStock());
+                p.setMin(part.getMin());
+                p.setMax(part.getMax());
+                if (part.getClass().isInstance(InhousePart.class)){
+                    System.out.println("Is an instance of Inhouse Part");
+                }
+            }
+        }
     }
 
     public static void updateProduct(int id, Product product){
 
-//        for (Product p : allProducts){
-//            if (id == p.getId()){
-//                p.setName(product.getName());
-//                p.setName(product.getName());
-//                p.setPrice(product.getPrice());
-//                p.setStock(product.getStock());
-//                p.setMin(product.getMin());
-//                p.setMax(product.getMax());
-//            }
-//        }
-        allProducts.set(product.getId(), product);
+        for (Product p : allProducts){
+            if (id == p.getId()){
+                p.setName(product.getName());
+                p.setName(product.getName());
+                p.setPrice(product.getPrice());
+                p.setStock(product.getStock());
+                p.setMin(product.getMin());
+                p.setMax(product.getMax());
+            }
+        }
     }
 
     public static Part lookupPart(int id){
@@ -92,8 +93,9 @@ public class Inventory {
     public static ObservableList<Part> lookupPart(String name){
         ObservableList<Part> parts = FXCollections.observableArrayList();
         for (Part p : allParts){
-            if (name == p.getName()){
-               // return p;
+            if (name.equals(p.getName())){
+
+                return parts;
             }
         }
        //return null;
@@ -103,8 +105,8 @@ public class Inventory {
     public static ObservableList<Product> lookupProduct(String name){
         ObservableList<Product> products = FXCollections.observableArrayList();
         for (Product p : allProducts){
-            if (name == p.getName()){
-                // return p;
+            if (name.equals(p.getName())){
+                return products;
             }
         }
         //return null;
@@ -140,5 +142,6 @@ public class Inventory {
         }
         return check;
     }
+
 
 }
