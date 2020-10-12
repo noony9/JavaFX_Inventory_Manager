@@ -15,11 +15,10 @@ public class OutsourcedPart extends Part {
      * @param stock stock inventory
      * @param min minimum inventory
      * @param max maximum inventory
-     * @param inHouse flag for inhouse or outsourced part
      * @param companyName company name
      * */
-    public OutsourcedPart(int id, String name, double price, int stock, int min, int max, boolean inHouse, String companyName) {
-        super(id, name, price, stock, min, max, inHouse);
+    public OutsourcedPart(int id, String name, double price, int stock, int min, int max, String companyName) {
+        super(id, name, price, stock, min, max);
         this.companyName = companyName;
     }
 

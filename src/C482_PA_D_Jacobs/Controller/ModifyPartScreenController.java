@@ -60,23 +60,15 @@ public class ModifyPartScreenController implements Initializable {
             partMinText.setText(String.valueOf(part.getMin()));
             partMaxText.setText(String.valueOf(part.getMax()));
 
-            if (part.isInHouse()){
+            if (part instanceof InhousePart){
                 machineIDLabel.setText("Machine ID");
+                partMachineIDText.setText(String.valueOf(((InhousePart) part).getMachineID()));
             }
             else {
                 machineIDLabel.setText("Company Name");
                 outsourcedRadioButton.setSelected(true);
-            }
-
-            if (part instanceof InhousePart){
-
-                partMachineIDText.setText(String.valueOf(((InhousePart) part).getMachineID()));
-            }
-            else {
-
                 partMachineIDText.setText(((OutsourcedPart) part).getCompanyName());
             }
-
     }
 
     /**
@@ -99,6 +91,11 @@ public class ModifyPartScreenController implements Initializable {
      * */
     public void onActionSaveModifyPart(ActionEvent actionEvent) throws IOException {
 
+        // Programmed into this code block is an input validator method that is inserted as a gatekeeper to prevent
+        // common runtime IO exceptions from user input and controlling the user's ability to save data entered into
+        // form fields until user input meets specifications defined in the validator method and assists the user in
+        // identifying appropriate input by using pop-up warnings to guide input.  The onActionSaveModifyPart method will
+        // throw an IOException to catch any exceptional cases of user input not prevented by the input validator method.
         if(validateInput()) {
             if (partGroup.getSelectedToggle() == inhouseRadioButton){
 
@@ -112,7 +109,7 @@ public class ModifyPartScreenController implements Initializable {
                 int machineID = Integer.parseInt(partMachineIDText.getText());
 
                 // create the inhouse part
-                Part inhousePart = new InhousePart(id, name, price, stock, min, max, true, machineID);
+                Part inhousePart = new InhousePart(id, name, price, stock, min, max, machineID);
 
                 // update the inhouse part
                 Inventory.updatePart(inhousePart.getId(), inhousePart);
@@ -131,7 +128,7 @@ public class ModifyPartScreenController implements Initializable {
 
                 // create the outsourced part
                 Part outsourcedPart = new OutsourcedPart(id, name, price, stock, min, max,
-                        false, companyName);
+                        companyName);
 
                 // update the outsourced part
                 Inventory.updatePart(outsourcedPart.getId(), outsourcedPart);

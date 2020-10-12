@@ -127,6 +127,11 @@ public class ModifyProductScreenController implements Initializable {
      * */
     public void onActionSaveAddProduct(ActionEvent actionEvent) throws IOException {
 
+        // Programmed into this code block is an input validator method that is inserted as a gatekeeper to prevent
+        // common runtime IO exceptions from user input and controlling the user's ability to save data entered into
+        // form fields until user input meets specifications defined in the validator method and assists the user in
+        // identifying appropriate input by using pop-up warnings to guide input.  The onActionSaveAddProduct method will
+        // throw an IOException to catch any exceptional cases of user input not prevented by the input validator method.
         if (validateInput()) {
 
             try {

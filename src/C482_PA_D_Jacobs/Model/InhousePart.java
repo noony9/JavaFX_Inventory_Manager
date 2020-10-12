@@ -15,11 +15,10 @@ public class InhousePart extends Part {
      * @param stock stock inventory
      * @param min minimum inventory
      * @param max maximum inventory
-     * @param inHouse flag for inhouse or outsourced part
      * @param machineID machine ID
      * */
-    public InhousePart(int id, String name, double price, int stock, int min, int max, boolean inHouse, int machineID) {
-        super(id, name, price, stock, min, max, inHouse);
+    public InhousePart(int id, String name, double price, int stock, int min, int max, int machineID) {
+        super(id, name, price, stock, min, max);
         this.machineID = machineID;
 
     }

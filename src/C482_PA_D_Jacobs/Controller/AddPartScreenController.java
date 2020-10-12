@@ -59,7 +59,11 @@ public class AddPartScreenController implements Initializable {
      * @throws IOException Signals that an I/O exception of some sort has occurred.
      * */
     public void onActionSaveAddPart(ActionEvent actionEvent) throws IOException {
-
+        // Programmed into this code block is an input validator method that is inserted as a gatekeeper to prevent
+        // common runtime IO exceptions from user input and controlling the user's ability to save data entered into
+        // form fields until user input meets specifications defined in the validator method and assists the user in
+        // identifying appropriate input by using pop-up warnings to guide input.  The onActionSaveAddPart method will
+        // throw an IOException to catch any exceptional cases of user input not prevented by the input validator method.
         if (validateInput()) {
             if (partGroup.getSelectedToggle() == inhouseRadioButton){
 
@@ -91,7 +95,7 @@ public class AddPartScreenController implements Initializable {
                     int machineID = Integer.parseInt(partMachineIDText.getText());
 
                     // create the inhouse part
-                    Part inhousePart = new InhousePart(id, name, price, stock, min, max, true, machineID);
+                    Part inhousePart = new InhousePart(id, name, price, stock, min, max, machineID);
 
                     // add inhouse part to parts list
                     Inventory.addPart(inhousePart);
@@ -138,7 +142,7 @@ public class AddPartScreenController implements Initializable {
 
                     // create the outsourced part
                     Part outsourcedPart = new OutsourcedPart(id, name, price, stock, min, max,
-                            false, companyName);
+                            companyName);
 
                     // add outsourced part to parts list
                     Inventory.addPart(outsourcedPart);

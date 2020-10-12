@@ -11,7 +11,6 @@ public abstract class Part {
     private int stock;
     private int min;
     private int max;
-    private boolean inHouse;
 
     /**
      * Constructor
@@ -21,16 +20,14 @@ public abstract class Part {
      * @param stock stock inventory
      * @param min minimum inventory
      * @param max maximum inventory
-     * @param inHouse flag for inhouse or outsourced part
      * */
-    public Part(int id, String name, double price, int stock, int min, int max, boolean inHouse){
+    public Part(int id, String name, double price, int stock, int min, int max){
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
         this.min = min;
         this.max = max;
-        this.inHouse = inHouse;
     }
 
     /**
@@ -138,23 +135,5 @@ public abstract class Part {
     public void setMax(int max) {
 
         this.max = max;
-    }
-
-    /**
-     * This method returns the true if the Part is Inhouse.
-     * @return boolean inHouse
-     * */
-    public boolean isInHouse() {
-
-        return inHouse;
-    }
-
-    /** This method sets the part to Inhouse.
-     * This method sets an identifier, indicating if the Part is Inhouse or not.
-     * @param inHouse The part is Inhouse or Outsourced
-     * */
-    public void setInHouse(boolean inHouse) {
-
-        this.inHouse = inHouse;
     }
 }

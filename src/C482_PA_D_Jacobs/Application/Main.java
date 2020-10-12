@@ -29,19 +29,16 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         // Create dummy parts
-        Part robotArm = new InhousePart(0,"Robot Arms", 10.00, 150, 1, 500, true,
-                111);
-        Part robotLeg = new InhousePart(1,"Robot Legs", 15.00, 100, 1, 500, true,
-                112);
-        Part robotHead = new InhousePart(2,"Robot Head", 20.00, 50, 1, 500, true,
-                113);
-        Part robotTorso = new OutsourcedPart(3,"Robot Torso", 11.00, 80, 0, 100, false,
+        Part robotArm = new InhousePart(0,"Robot Arms", 10.00, 150, 1, 500,111);
+        Part robotLeg = new InhousePart(1,"Robot Legs", 15.00, 100, 1, 500,112);
+        Part robotHead = new InhousePart(2,"Robot Head", 20.00, 50, 1, 500,113);
+        Part robotTorso = new OutsourcedPart(3,"Robot Torso", 11.00, 80, 0, 100,
                 "XYZ Parts");
-        Part robotHands = new OutsourcedPart(4,"Robot Hands", 16.00, 60, 0, 75, false,
+        Part robotHands = new OutsourcedPart(4,"Robot Hands", 16.00, 60, 0, 75,
                 "XYZ Parts");
-        Part robotFeet = new OutsourcedPart(5,"Robot Feet", 21.00, 20, 0, 30, false,
+        Part robotFeet = new OutsourcedPart(5,"Robot Feet", 21.00, 20, 0, 30,
                 "XYZ Parts");
-        Part tenWDFourty = new OutsourcedPart(6,"10wd40 Oil", 25.00, 20, 0, 30, false,
+        Part tenWDFourty = new OutsourcedPart(6,"10wd40 Oil", 25.00, 20, 0, 30,
                 "XYZ Parts");
 
         // Add parts to observable list
